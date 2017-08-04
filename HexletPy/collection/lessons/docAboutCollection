@@ -1,0 +1,131 @@
+Collections in Python
+
+Lists, Tuples, Dictionaries and Sets
+
+List
+
+* Square brackets syntax
+* Mutable
+* Get value by index (from zero)
+
+value = [1, 2, 5]
+value[0]                     1
+value[10]                    IndexError
+value[2] = 3                 [1, 2, 3]
+value.append(42)             [1, 2, 3, 42]
+value.extend([4, 5, 6])      [1, 2, 3, 42, 4, 5, 6]
+value.insert(0, 20)          [20, 1, 2, ...]
+value.sort()                 [1, 2, 3, 4, 5, 6, 20, 42]
+value.pop()                  42
+["foo", "bar"] + value       ["foo", 'bar", 1, 2, ...]
+
+Tuple
+
+* Round brackets syntax
+* Immutable
+* A little bit faster than list
+
+value = (1, 2, 3)
+value[1]                           2
+("foo", "bar", **True**) + value       ("foo", "bar", **True**, 1, 2, 3)
+value[1] = 2                       **Exception**
+
+Dictionary
+
+* Key-value storage
+* Mutable
+* O(1) access complexity
+* Any immutable value as a key
+
+mydict = {"key1": 1, "key2": 2}
+mydict["key1"]                         1
+mydict["foo"]                          KeyError
+mydict.get("foo")                      **None**
+mydict["key3"] = 2                     {... "key3": 3}
+mydict.update({"key3: 33"})            {... "key3": 33}
+mydict.keys()                          ["key1", "key2, ..."]
+mydict.values()                        [1, 2, 33]
+mydict.items()                         [("key1", 1), ("key2", 2),...]
+mydict.pop("key1")                     1
+
+Set
+
+* Stores unique values
+* Based on hashes
+* Only immutable values
+* Supports subtractions, intersections, etc
+
+myset = {1, 2, 3}             {1, 2, 3}
+{1, 1, 2, 2, 3, 3}            {1, 2, 3}
+myset.add(4)                  {1, 2, 3, 4}
+myset & {3, 4, 5}             {3, 4}
+myset | {3, 4, 5}             {1, 2, 3, 4, 5}
+myset - {4, 3, 2}             {1}
+
+Some notes
+
+value = 1,             it’s a tuple
+value = {}             it’s an **empty** dict
+value = set()          it’s an **empty** set
+
+Common operations
+
+* Check if the collection has an element
+* Slices
+* Iteration
+* Unpacking
+* Coerce to other type
+
+In
+
+2 **in** [1, 2, 3]                      **True**2 **in** (1, 2, 3)                      **True**"foo" **in** {"key1": 1, "key2": 2}     **False****True** **in** {**True**, **None**, 42}            **True**
+
+Slices
+
+mylist = [1, 2, 3, 4, 5]
+mylist[0:2]                     [1, 2]
+mylist[:3]                      [1, 2, 3]
+mylist[1:-1]                    [2, 3, 4]
+mylist[::2]                     [1, 3, 5]
+mylist[::-2]                    [5, 3, 1]
+mylist[::-1]                    [5, 4, 3, 2, 1]
+
+Iteration
+
+**for** x **in** [1, 2, 3]:                  1, 2, 3**for** x **in** ("foo", "bar", **True**):        "foo", "bar", **True****for** x **in** {"key1": 1, "key2": 2}       "key2", "key1"**for** x **in** {42, "test", **True**}           "test", **True**, 42
+
+data = (1, 2, 3, 4, 5)**for** x **in** data[::-2]:                  5, 3, 1
+
+Unpacking Lists and Tuples
+
+a, b = [1, 2]
+foo, bar, _, _, baz = (10, 20, None, None, 30)
+a, b = b, a + b
+a, b = (1, 2, 3)**>>** ValueError: too many values to unpack
+
+Convert collections
+
+list({1, 2, 3})                     [1, 3, 2]
+tuple([1, 2, 3])                    (1, 2, 3)set((1, 3, 1, 3, 2))                {1, 3, 2}
+dict([("key1": 1), (42: 2)])        {"key1": 1, 42: 2}
+
+Nested collections
+
+emps = [
+    {"name": "John",
+     "ser_num": (6345, 6345623)},
+        ....
+]
+
+ser, num = emps[0]["ser_num"]
+
+Tips
+
+unique_list   = **list**(set(some_list))
+new_dict      = dict(zip(iter_keys, iter_vals))
+reversed_list = sorted(my_list, reverse=**True**)
+reversed_list = my_list[::-1]
+**for** i, value in enumerate(my_list):
+    **print** i
+    do_something(value)
+
